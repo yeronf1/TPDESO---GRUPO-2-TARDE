@@ -1,0 +1,196 @@
+--------------------- INTEGRANTES --------------------- 
+
+Bianculli, Pablo DNI: 44.526.128
+Bolea, Sofía DNI: 45.491.941
+Radolovic, Victoria DNI: 44.575.986
+Yeroncich, Francisco DNI: 44.761.848
+
+--------------------- INSTRUCCIONES PARA EJECUCIÓN DE PROYECTO FINAL DE DESAROLLO --------------------- 
+
+1. Abrir en el IDE Apache NETBeans el archivo 'TP_DESARROLLO_SPRINGBOOT.zip'.
+
+2. Una vez abierto, en el menú de carpetas y paquetes, abrir: 'Other Sources' -> src/main/sources -> <default package> -> application.properties.
+
+3. Habiendo abierto ese archivo, ubicar las líneas:
+	spring.datasource.username=root
+	spring.datasource.password=
+   Y completar el campo password con la contraseña respectiva del perfil 'root' del servidor de base de datos MySQL que tengan ustedes instalado.
+
+4. Hecho eso, se procede a la conexión a la base de datos; para eso tienen dos opciones:
+
+	4.1 Por un lado pueden levantar el archivo 'TPDESO-GRUPO2-TARDE.sql' que ya tiene todas las tablas creadas en la base de datos con las respectivas inserciones de ejemplo.
+	
+	4.2 Por otro lado, pueden aprovechar que SpringBoot crea todas las tablas automáticamente al ejecutar el proyecto; hecho eso, en la consola del mismo IDE o mediante una terminal, ingresen las siguientes consultas correspondientes al llenado de las tablas (ejemplos):
+
+GRANT ALL PRIVILEGES ON pg_deso.* TO 'root'@'localhost'; #  Para darle todos los privilegios al usuario root.
+FLUSH PRIVILEGES;
+
+INSERT INTO clientes (nombre, cuit, email, direccion, lat, lng)
+VALUES
+    ('Juan Perez', '20234567891', 'juan@ejemplo.com', 'Calle Falsa 123', -34.60, -58.38),
+    ('María Gomez', '20123456782', 'maria@ejemplo.com', 'Av. Siempre Viva 742', -34.60, -58.37),
+    ('Pedro Martinez', '20345678903', 'pedro@ejemplo.com', 'Pavón 5621', -34.61, -58.38),
+    ('Ana Lopez', '20456789014', 'ana@ejemplo.com', 'Bv. Las Grevileas 3480', -34.61, -58.37),
+    ('Carlos Jimenez', '20567890125', 'carlos@ejemplo.com', 'San Lorenzo 1580', -34.62, -58.39),
+    ('Laura Fernandez', '20678901236', 'laura@ejemplo.com', 'Av. Belgrano 2345', -34.62, -58.36),
+    ('Ricardo Sánchez', '20789012347', 'ricardo@ejemplo.com', 'Calle Alsina 456', -34.63, -58.37),
+    ('Lucía Herrera', '20890123458', 'lucia@ejemplo.com', 'Av. Corrientes 900', -34.63, -58.38);
+
+-- Insertamos instancias de vendedores:
+INSERT INTO vendedores (nombre, direccion, lat, lng)
+VALUES
+    ('La Dominga', 'Javier de la Rosa 101', -34.60, -58.38),
+    ('El Nacional', 'Ituzaingó 1090', -34.61, -58.37),
+    ('Paprika', 'San Martin 1707', -34.61, -58.36),
+    ('Bilbao Amarras', 'Calle 1º de Enero 27', -34.62, -58.35),
+    ('Dr. Jekyll', 'Marcial Candioti 3414', -34.62, -58.34),
+    ('La Cabaña', 'Av. Libertador 5900', -34.63, -58.33),
+    ('El Almacén', 'Calle Florida 102', -34.63, -58.32),
+    ('La Terraza', 'Belgrano 2001', -34.64, -58.31);
+
+-- Insertamos categorías:
+INSERT INTO categorias (descripcion_categoria, tipo_item)
+VALUES
+    ('Entradas',0),
+    ('Comidas principales',0),
+    ('Jugos/Gaseosas/Aguas', 1),
+    ('Cervezas/Vinos/Bebidas Espirituosas', 1),
+    ('Postres',0),
+    ('Tragos/Cocktails', 1);
+
+-- Insertamos instancias de platos y bebidas (con sus respectivos IDs de vendedor):
+INSERT INTO items_menu (dtype, nombre, id_categoria, descripcion, precio, graduacion_alcoholica, es_gaseosa, volumen, peso, calorias, apto_vegetariano, apto_celiaco, id_vendedor)
+VALUES
+    ('Bebida','Agua Mineral', 3, 'Descripción', 1200, 0.0, false, 500, NULL, NULL, NULL, NULL, 1),
+    ('Bebida', 'Jugo de Pomelo', 3, 'Descripción', 1800, 0.0, true, 610, NULL, NULL, NULL, NULL, 2),
+    ('Bebida', 'Whisky', 4, 'Descripción', 20000, 55.0, false, 920, NULL, NULL, NULL, NULL, 3),
+    ('Bebida', 'Cerveza negra', 4, 'Descripción', 700, 7.5, false, 250, NULL, NULL, NULL, NULL, 4),
+    ('Bebida', 'Fernet', 6, 'Descripción', 12000, 45.0, false, 750, NULL, NULL, NULL, NULL, 5),
+    ('Bebida', 'Coca Cola', 3, 'Descripción', 850, 0.0, true, 600, NULL, NULL, NULL, NULL, 6),
+    ('Bebida', 'Ron Blanco', 4, 'Descripción', 15000, 40.0, false, 700, NULL, NULL, NULL, NULL, 7),
+    ('Bebida', 'Limonada Casera', 3, 'Descripción', 1200, 0.0, false, 500, NULL, NULL, NULL, NULL, 8),
+    ('Bebida', 'Cerveza IPA', 4, 'Descripción', 950, 5.0, false, 473, NULL, NULL, NULL, NULL, 7),
+    ('Bebida', 'Gaseosa de Naranja', 3, 'Descripción', 700, 0.0, true, 500, NULL, NULL, NULL, NULL, 6),
+    ('Bebida', 'Gin Tonic', 6, 'Descripción', 18000, 37.5, false, 750, NULL, NULL, NULL, NULL, 5),
+    ('Bebida', 'Sidra Espumante', 4, 'Descripción', 2200, 4.5, false, 750, NULL, NULL, NULL, NULL, 4),
+    ('Bebida', 'Agua Tónica', 3, 'Descripción', 900, 0.0, true, 350, NULL, NULL, NULL, NULL, 3),
+    ('Bebida', 'Vino Malbec', 4, 'Descripción', 25000, 13.5, false, 750, NULL, NULL, NULL, NULL, 2),
+    ('Bebida', 'Vodka', 4, 'Descripción', 18000, 40.0, false, 700, NULL, NULL, NULL, NULL, 1),
+    ('Bebida', 'Ron con Coca', 6, 'Descripción', 9000, 35.0, true, 500, NULL, NULL, NULL, NULL, 8);
+
+
+INSERT INTO items_menu (dtype, nombre, id_categoria, descripcion, precio, graduacion_alcoholica, es_gaseosa, volumen, peso, calorias, apto_vegetariano, apto_celiaco, id_vendedor)
+VALUES
+    ('Plato', 'Pizza Napolitana', 2, 'Descripción', 10500, NULL, NULL, NULL, 2000, 1899, true, false, 1),
+    ('Plato', 'Sorrentinos de 4 quesos', 2, 'Descripción', 9350, NULL, NULL, NULL, 750, 1500, true, false, 2),
+    ('Plato', 'Matambre a la pizza', 2, 'Descripción', 12150, NULL, NULL, NULL, 1200, 1050, false, true, 3),
+    ('Plato', 'Sushi', 2, 'Descripción', 12000, NULL, NULL, NULL, 500, 850, false, false, 4),
+    ('Plato', 'Helado de Dulce de Leche',5, 'Descripción', 5700, NULL, NULL, NULL, 1000, 2400, true, false, 5),
+    ('Plato', 'Lasaña de Espinaca', 2, 'Descripción', 8500, NULL, NULL, NULL, 800, 950, true, false, 6),
+    ('Plato', 'Bife de Chorizo con Papas', 2, 'Descripción', 18500, NULL, NULL, NULL, 1500, 1200, false, true, 7),
+    ('Plato', 'Ensalada César', 2, 'Descripción', 5000, NULL, NULL, NULL, 400, 600, true, true, 8),
+    ('Plato', 'Risotto de Hongos', 2, 'Descripción', 11000, NULL, NULL, NULL, 650, 850, true, false, 7),
+    ('Plato', 'Pollo al Champiñón', 2, 'Descripción', 12750, NULL, NULL, NULL, 900, 1050, false, true, 6),
+    ('Plato', 'Tarta de Verduras', 1, 'Descripción', 6000, NULL, NULL, NULL, 700, 750, true, false, 5),
+    ('Plato', 'Empanadas de Carne', 1, 'Descripción', 4000, NULL, NULL, NULL, 500, 650, false, false, 4),
+    ('Plato', 'Hamburguesa Vegana', 2, 'Descripción', 9500, NULL, NULL, NULL, 450, 800, true, true, 3),
+    ('Plato', 'Papas Fritas con Cheddar', 1, 'Descripción', 3700, NULL, NULL, NULL, 300, 500, true, false, 2),
+    ('Plato', 'Brownie con Helado', 5, 'Descripción', 5700, NULL, NULL, NULL, 250, 1200, true, false, 1),
+    ('Plato', 'Chinchulines a la mostaza', 2, 'Descripción', 8000, NULL, NULL, NULL, 1450, 1400, false, true, 8);
+
+-- Insertamos instancias de pagos:
+INSERT INTO pagos (dtype, fecha_pago, cuit, cbu, alias)
+VALUES
+    ('MercadoPago', '2024-11-01 10:30:00', NULL, NULL, 'alias-personal'),
+    ('MercadoPago', '2024-11-02 14:15:00', NULL, NULL, 'alias-negocio'),
+    ('MercadoPago', '2024-11-03 09:45:00', NULL, NULL, 'alias-cuenta-familiar'),
+    ('MercadoPago', '2024-11-04 16:20:00', NULL, NULL, 'alias-ahorro'),
+
+    ('Transferencia', '2024-11-05 11:50:00', '20-12345678-9', '0123456789012345678901', NULL),
+    ('Transferencia', '2024-11-06 13:35:00', '23-87654321-4', '9876543210987654321098', NULL),
+    ('Transferencia', '2024-11-07 08:10:00', '30-11223344-5', '1111222233334444555566', NULL),
+    ('Transferencia', '2024-11-08 17:25:00', '27-99887766-0', '2222333344445555666677', NULL);
+
+-- Insertamos instancias de pedidos:
+INSERT INTO pedidos (id_cliente, total, id_pago,estado_pedido)
+VALUES
+    (1, 36108.0, 1,'RECIBIDO'),
+    (2, 40647.0, 2,'RECIBIDO'),
+    (3, 43401.0, 3,'RECIBIDO'),
+    (4, 19278.0, 4,'RECIBIDO'),
+    (5, 42534.0, 5,'RECIBIDO'),
+    (6, 23256.0, 6,'RECIBIDO'),
+    (7, 46359.0, 7,'RECIBIDO'),
+    (8, 23664.0, 8,'RECIBIDO');
+
+-- Insertamos instancias de pedidos:
+INSERT INTO items_pedidos (id_pedido, id_item_menu, cantidad)
+VALUES
+    (1, 1, 15),
+    (1, 17, 8),
+    (1, 15, 12),
+    (1, 31, 19),
+    (2, 2, 5),
+    (2, 18, 7),
+    (2, 14, 16),
+    (2, 30, 3),
+    (3, 3, 11),
+    (3, 19, 20),
+    (3, 13, 9),
+    (3, 29, 13),
+    (4, 4, 4),
+    (4, 20, 17),
+    (4, 12, 10),
+    (4, 28, 6),
+    (5, 5, 18),
+    (5, 21, 2),
+    (5, 11, 14),
+    (5, 27, 1),
+    (6, 6, 15),
+    (6, 22, 3),
+    (6, 10, 8),
+    (6, 26, 12),
+    (7, 7, 19),
+    (7, 23, 6),
+    (7, 9, 14),
+    (7, 25, 9),
+    (8, 8, 11),
+    (8, 24, 5),
+    (8, 16, 7),
+    (8, 32, 16);
+
+
+    -> CONSIDERACIÓN: ustedes pidieron que la base de datos se llame pg-deso pero el IDE (o más bien SQL) no permitía crearla con ese nombre debido al guión medio, así que se llama pg_deso (con guión bajo).
+
+5. Hecho eso y sin cerrar dicho proyecto, abrir en algún IDE como Intellij IDEA o Visual Studio Code el archivo 'TP_DESARROLLO_FRONTEND.zip', correspondiente al frontend del trabajo práctico (archivos HTML, CSS y JSX).
+   Si no abre directamente el archivo .zip, descomprimirlo y abrir la carpeta extraída en alguno de los IDEs mencionados.
+
+6. Abrir una terminal y navegar (mediante el comando cd) a la ubicación TP_DESAROLLO_FINAL, de la siguiente manera:
+
+   PS D:\Francisco\UTN\3° Año\Desarrollo de Software\Trabajo práctico\TP_DESARROLLO_FRONTEND> cd .\TP_Desarrollo_FRONT\
+   PS D:\Francisco\UTN\3° Año\Desarrollo de Software\Trabajo práctico\TP_DESARROLLO_FRONTEND\TP_Desarrollo_FRONT> cd .\TP_DESARROLLO_FINAL\
+
+   -> CONSIDERACIÓN: el path o ruta dependerá del directorio previo a TP_DESARROLLO_FRONTEND, adonde descarguen y descompriman el archivo del front.
+
+7. Ejecutar ahí: npm install (sirve para instalar las dependencias definidas en el archivo package.json del proyecto, ya que se utiliza Node.js)
+
+   -> CONSIDERACIÓN: es necesario tener instalado NodeJS.
+
+8. Luego, ejecutar npm run dev, lo cual ejecuta el script personalizado llamado 'dev' bajo la sección "scripts" del archivo package.json, y sirve para iniciar el entorno de desarrollo de la aplicación.
+
+9. Habiendo ejecutado npm rn dev, en la misma consola donde se ejecutó debería aparecer un link, el cual, al presionarse, debería redirigir en el navegador a la página donde se alojan todas las interfaces del proyecto.
+
+10. Teniendo en ejecución tanto el backend (TP_DESARROLLO_SPRINGBOOT) como el frontend (TP_DESARROLLO_FRONTEND) en sus respectivos IDEs, mediante ese link ya se podría acceder y utilizar todo lo relativo al trabajo práctico.
+
+
+--------------------- CONSIDERACIONES FINALES --------------------- 
+
+- Por cualquier problema que haya, no duden en contactar a cualquiera sea del grupo (por favor mandar mail, ya que el campus no avisa de los comentarios). 
+  De ser necesario, podemos coordinar una llamada o reunión presencial para mostrarles el funcionamiento del trabajo.
+
+- Aparte del archivo 'TP_DESARROLLO_SPRINGBOOT.zip', también les subimos otro archivo 'PROYECTO VIEJO (hasta entrega 7).zip' que corresponde a todo lo codificado desde el principio hasta la entrega 7; para la entrega 8 generamos
+  un nuevo proyecto para poder hacerlo enteramente y de cero en SpringBoot, reutilizando, por supuesto, lo hecho en las entregas anteriores y ampliando con todo lo necesario.
+
+- Si de entrada parece no conectarse el frontend con el backend, revisar la URL de la interfaz (tiene que ser http://localhost:5174/). En el caso de que ese número sea diferente, ir al proyecto backend, al paquete "Config", abrir
+  la clase 'CorsConfig' y modificar la línea 'allowedOrigins("http://localhost:5174")' por 'allowedOrigins("http://localhost:517X")' reemplazando la X por el número de la URL que esté distinto.
+
