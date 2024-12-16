@@ -9,7 +9,7 @@ Yeroncich, Francisco DNI: 44.761.848
 
 Este repositorio contiene todos los archivos relacionados al trabajo práctico de la materia, incluyendo frontend, backend y base de datos, entre otras cosas.
 
-## ESTRCTURA DEL PROYECTO:
+## ESTRUCTURA DEL PROYECTO:
 - **`Backend/`**: Código fuente del desarrollo del backend.
 - **`Frontend/`**: Código fuente del desarrollo del frontend.
 - **`SQL/`**: Script de la base de datos con inserciones de ejemplo ya hechas (`pg_deso.sql`).
